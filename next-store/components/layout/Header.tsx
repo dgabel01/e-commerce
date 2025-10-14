@@ -10,7 +10,7 @@ export default function Header() {
       {/* Desktop Layout */}
       <div className="hidden lg:block w-full h-full relative">
         {/* Left Logo */}
-        <div className="absolute left-[96px] top-1/2 transform -translate-y-1/2">
+        <div className="absolute left-[32px] top-1/2 transform -translate-y-1/2">
           <a className="text-[24px] font-medium leading-[90%] tracking-normal w-[175px] h-[22px]">
             SofaSocietyCo.
           </a>
@@ -26,7 +26,7 @@ export default function Header() {
         </div>
 
         {/* Right Icons */}
-        <div className="absolute right-[96px] top-1/2 transform -translate-y-1/2 flex items-center gap-[32px] w-[163px] h-[24px]">
+        <div className="absolute right-[32px] top-1/2 transform -translate-y-1/2 flex items-center gap-[32px] w-[163px] h-[24px]">
           <div className="flex items-center gap-1 cursor-pointer">
             <span className="font-normal text-[16px] leading-[140%]">HR</span>
             <Image src={dropdownIcon} alt="Dropdown" width={24} height={24} />

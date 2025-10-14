@@ -1,8 +1,11 @@
+import Collection from "@/components/products/Collection"
+import Hero from "@/components/products/Hero"
 
 export default async function ProductsPage() {
-  
-
   return (
-    <p>dsadas</p>
+    <main>
+      <Hero/>
+      <Collection/>
+    </main>
   )
 }
