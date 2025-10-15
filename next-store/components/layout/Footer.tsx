@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-base-300 text-[#050505] py-10">
+    <footer className="bg-[#F4F4F4] text-[#050505] py-10 h-[335px]">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-10 flex flex-col lg:flex-row lg:justify-between gap-10">
 
         {/* Newsletter */}
@@ -44,10 +44,11 @@ export default function Footer() {
             <a className="font-normal">Facebook</a>
           </nav>
           <nav className="flex flex-col gap-2 flex-1 min-w-[0]">
-            <a className="font-normal">Privacy Policy</a>
-            <a className="font-normal">Cookie Policy</a>
-            <a className="font-normal">Terms of Use</a>
+            <a className="font-normal whitespace-nowrap">Privacy Policy</a>
+            <a className="font-normal whitespace-nowrap">Cookie Policy</a>
+            <a className="font-normal whitespace-nowrap">Terms of Use</a>
           </nav>
+
         </div>
       </div>
     </footer>

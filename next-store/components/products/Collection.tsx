@@ -5,9 +5,9 @@ import imageThree from "@/public/images/collection_image_three.png";
 
 export default function Collection() {
   return (
-    <section className="bg-white">
+    <section className="bg-white mt-8">
       {/* Heading */}
-      <h2 className="font-mona font-medium text-lg md:text-[48px] leading-[140%] text-center lg:text-left p-8">
+      <h2 className="font-[500] text-[48px] md:text-[48px] leading-[140%] text-center lg:text-left p-8">
         Collection Inspired Interior
       </h2>
 
@@ -55,7 +55,7 @@ export default function Collection() {
 
             {/* Text */}
             <div className="w-full lg:flex-1">
-              <p className="font-mona font-medium text-lg md:text-[48px] leading-[140%] mb-4">
+              <p className="font-[500] text-[48px] md:text-[48px] leading-[140%] mb-4">
                 The Paloma Haven sofa is a masterpiece of minimalism and luxury.
               </p>
               <p className="underline text-[24px] font-normal">See more out of &apos;Modern Luxe&apos; collection</p>
