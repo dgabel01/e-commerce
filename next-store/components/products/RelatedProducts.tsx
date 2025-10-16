@@ -7,10 +7,23 @@ import { Product } from "@/types/productType";
 export function RelatedProducts() {
   const [products, setProducts] = useState<Product[]>([]);
 
+  const fixImageUrl = (url?: string) => {
+    if (!url) return "";
+    return url.replace("localhost:9000", "localhost:9001");
+  };
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { products } = await medusa.products.list({ limit: 3 });
+        const { collections } = await medusa.collections.list({ handle: "related-products", limit: 1 });
+        if (!collections?.length) return;
+
+        const collectionId = collections[0].id;
+
+        const { products } = await medusa.products.list({
+          collection_id: collectionId,
+        });
+
         setProducts(products);
       } catch (err) {
         console.error("Failed to fetch related products", err);
@@ -29,7 +42,7 @@ export function RelatedProducts() {
             {product.thumbnail && (
               <div className="w-full h-48 relative mb-4">
                 <Image
-                  src={product.thumbnail}
+                  src={fixImageUrl(product.thumbnail)}
                   alt={product.title}
                   fill
                   className="object-cover rounded"

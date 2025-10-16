@@ -11,6 +11,7 @@
   "dependencies": {
     "@material-tailwind/react": "^2.1.10",
     "@medusajs/medusa-js": "^6.1.10",
+    "@medusajs/pricing": "^2.10.3",
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
@@ -20,7 +21,9 @@
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "zustand": "^5.0.8",
+    "zustand-computed": "^2.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

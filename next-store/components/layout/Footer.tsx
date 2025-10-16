@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-[#F4F4F4] text-[#050505] py-10 h-[335px]">
+    <footer className="bg-[#F4F4F4] text-[#050505] py-10 ">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-10 flex flex-col lg:flex-row lg:justify-between gap-10">
 
         {/* Newsletter */}
