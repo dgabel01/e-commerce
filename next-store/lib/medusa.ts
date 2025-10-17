@@ -1,4 +1,3 @@
-// next-store/lib/medusa.ts
 import Medusa from "@medusajs/medusa-js"
 
 const medusa = new Medusa({

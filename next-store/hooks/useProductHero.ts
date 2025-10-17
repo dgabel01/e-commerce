@@ -16,48 +16,42 @@ export const useProductHero = (productId: string, regionId: string) => {
 
   const addItem = useCartStore((state) => state.addItem);
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        setLoading(true);
-        console.log("Fetching product with productId:", productId, "and regionId:", regionId);
+useEffect(() => {
+  const fetchProduct = async () => {
+    try {
+      setLoading(true);
+      console.log("Fetching product with productId:", productId, "and regionId:", regionId);
 
-        // Try with expand to include prices
-        let res;
-        try {
-          res = (await medusa.products.retrieve(productId, {
-            region_id: regionId,
-            expand: "variants.prices",
-          })) as unknown as { product: Product };
-          console.log("API response with expand:", res);
-        } catch (expandError) {
-          console.warn("Expand failed, trying without expand:", expandError);
-          res = (await medusa.products.retrieve(productId, {
-            region_id: regionId,
-          })) as unknown as { product: Product };
-          console.log("API response without expand:", res);
-        }
+      // Fetch product with explicit relations
+      const res = await medusa.products.retrieve(productId, {
+        region_id: regionId,
+        expand: "variants,variants.prices,variants.options,variants.options.option",
+      });
 
-        console.log("Product:", res.product);
-        console.log("Variants:", res.product?.variants);
-        console.log("First Variant Prices:", res.product?.variants?.[0]?.prices);
-        console.log("First Variant Calculated Price:", res.product?.variants?.[0]?.calculated_price);
+      // Log raw response to inspect structure
+      console.log("Raw API response:", JSON.stringify(res, null, 2));
 
-        setProduct(res.product);
-        if (res.product?.variants?.length) {
-          setSelectedVariant(res.product.variants[0]);
-        } else {
-          console.warn("No variants found for product:", productId);
-        }
-      } catch (error) {
-        console.error("Error fetching product:", error);
-      } finally {
-        setLoading(false);
+      const product = res.product as Product;
+      console.log("Parsed Product:", product);
+      console.log("Variants:", product?.variants);
+      console.log("First Variant:", product?.variants?.[0]);
+      console.log("First Variant Prices:", product?.variants?.[0]?.prices);
+
+      setProduct(product);
+      if (product?.variants?.length) {
+        setSelectedVariant(product.variants[0]);
+      } else {
+        console.warn("No variants found for product:", productId);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchProduct();
-  }, [productId, regionId]);
+  fetchProduct();
+}, [productId, regionId]);
 
   useEffect(() => {
     if (selectedVariant) {
@@ -107,7 +101,7 @@ export const useProductHero = (productId: string, regionId: string) => {
     if (!selectedVariant || !product) return;
 
     setAdding(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // 1s delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const material = selectedVariant.options?.find((o) => o.option?.title === "Material")?.value;
     const color = selectedVariant.options?.find((o) => o.option?.title === "Color")?.value;

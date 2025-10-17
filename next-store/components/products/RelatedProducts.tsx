@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import medusa from "@/lib/medusa";
 import Image from "next/image";
@@ -14,25 +13,17 @@ export function RelatedProducts() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const { collections } = await medusa.collections.list({ handle: "related-products", limit: 1 });
-        if (!collections?.length) {
-          console.warn("No collections found for handle: related-products");
-          return;
-        }
+        const { collections } = await medusa.collections.list({
+          handle: "related-products",
+          limit: 1,
+        });
+        if (!collections?.length) return;
 
         const collectionId = collections[0].id;
 
-        // Fetch products with region_id to include calculated prices
         const { products } = await medusa.products.list({
           collection_id: collectionId,
           region_id: "reg_01K7ES77EXHRJ5EH6TDSCEKES8", // Europe region
-        });
-        console.log("Fetched related products with variants:", products);
-
-        // Debug each product's variants and calculated prices
-        products.forEach((p: Product) => {
-          console.log(`Product: ${p.title}, Variants:`, p.variants);
-          console.log(`Product: ${p.title}, Calculated Price:`, p.variants?.[0]?.calculated_price);
         });
 
         setProducts(products);
@@ -68,35 +59,96 @@ export function RelatedProducts() {
 
   return (
     <section className="w-full max-w-6xl mx-auto px-4 py-16 mt-8 overflow-x-hidden">
-      <h2 className="text-[48px] font-[500] mb-6">Related Products</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-full">
-        {products.map((product) => (
-          <div key={product.id} className="rounded p-4 flex flex-col gap-2 max-w-full">
-            {product.thumbnail && (
-              <div className="w-full h-48 relative mb-4 max-w-full">
-                <Image
-                  src={fixImageUrl(product.thumbnail)}
-                  alt={product.title}
-                  fill
-                  className="object-cover rounded"
-                />
-              </div>
-            )}
-            <div className="flex flex-col gap-2">
-              <h3 className="font-[400] text-[16px]">{product.title}</h3>
-              <div className="flex justify-between items-start">
-                <p className="text-[#808080] text-[12px] font-[400]">{product.description}</p>
-                {product.variants?.[0]?.calculated_price?.calculated_amount ? (
-                  <p className="text-[#050505] font-[600] text-[16px]">
-                    €{(product.variants[0].calculated_price.calculated_amount)}
-                  </p>
-                ) : (
-                  <p className="text-[#808080] text-[12px] font-[400]">Price unavailable</p>
-                )}
+      <h2 className="text-[36px] md:text-[48px] font-[500] mb-6 leading-[140%]">
+        Related Products
+      </h2>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-[16px] md:gap-[24px] max-w-full">
+        {products.map((product) => {
+          const isHiddenMobile = product.title.toLowerCase() === "sutton royale";
+          const isOslo = product.title.toLowerCase() === "oslo drift";
+
+          return (
+            <div
+              key={product.id}
+              className={`rounded p-4 flex flex-col gap-2 max-w-full lg:w-[384px] lg:h-[353px] ${isHiddenMobile ? "hidden md:flex" : ""
+                }`}
+            >
+              {product.thumbnail && (
+                <div className="w-full h-40 md:h-48 relative mb-4 max-w-full">
+                  <Image
+                    src={fixImageUrl(product.thumbnail)}
+                    alt={product.title}
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              )}
+
+              <div className="flex flex-col gap-2 w-full">
+                <div className="md:hidden">
+                  <h3 className="font-[400] text-[14px] leading-[140%]">
+                    {product.title}
+                  </h3>
+
+                  {isOslo ? (
+                    <div className="flex justify-between items-baseline">
+                      <p className="text-[#DF4718] font-[600] text-[14px]">€2000</p>
+                      <p className="text-[#808080] text-[12px] line-through">€3000</p>
+                    </div>
+                  ) : (
+                    <p className="text-[#050505] font-[600] text-[14px] leading-[140%]">
+                      €
+                      {product.variants?.[0]?.calculated_price?.calculated_amount ||
+                        "N/A"}
+                    </p>
+                  )}
+                </div>
+
+                <div className="hidden md:flex flex-col gap-1">
+                  {isOslo ? (
+                    <>
+                      <div className="flex justify-between items-baseline">
+                        <h3 className="font-[400] text-[16px] leading-[140%]">
+                          {product.title}
+                        </h3>
+                        <p className="text-[#DF4718] font-[600] text-[16px]">
+                          €2000
+                        </p>
+                      </div>
+
+                      <div className="flex justify-between items-baseline">
+                        <p className="text-[#808080] text-[12px] font-[400] max-w-[70%]">
+                          {product.description}
+                        </p>
+                        <p className="text-[#808080] text-[14px] font-[400] line-through">
+                          €3000
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-between items-baseline">
+                        <h3 className="font-[400] text-[16px] leading-[140%]">
+                          {product.title}
+                        </h3>
+                        <p className="text-[#050505] font-[600] text-[16px] leading-[140%]">
+                          €
+                          {product.variants?.[0]?.calculated_price?.calculated_amount ||
+                            "N/A"}
+                        </p>
+                      </div>
+
+                      <p className="text-[#808080] text-[12px] font-[400] max-w-[80%]">
+                        {product.description}
+                      </p>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

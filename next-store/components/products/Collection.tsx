@@ -14,7 +14,7 @@ export default function Collection() {
       <div className="flex flex-col gap-[80px]">
         {/* First Image */}
         <div className="px-4 lg:px-0">
-          <div className="p-4 md:p-8 flex justify-center">
+          <div className="p-2 md:p-8 flex justify-center">
             <div className="w-full max-w-[1248px]">
               <Image
                 src={imageOne}
@@ -27,22 +27,26 @@ export default function Collection() {
           </div>
         </div>
 
-        {/* Second Image Fullscreen */}
-        <div className="w-full max-w-full">
-          <Image
-            src={imageTwo}
-            alt="Collection image 2"
-            width={1440}
-            height={809}
-            className="w-full h-auto object-cover"
-          />
+        {/* Second Image - same size & margin on mobile */}
+        <div className="px-4 lg:px-0">
+          <div className="p-2 md:p-0 flex justify-center">
+            <div className="w-full max-w-[1248px]">
+              <Image
+                src={imageTwo}
+                alt="Collection image 2"
+                width={1248}
+                height={702}
+                className="w-full h-auto object-cover rounded-lg"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Third Image and Text */}
         <div className="px-4 lg:px-0">
-          <div className="p-4 md:p-8 flex flex-col lg:flex-row items-center lg:items-start gap-6">
+          <div className="p-4 md:p-8 flex flex-col lg:flex-row items-start gap-6">
             {/* Third Image */}
-            <div className="w-full lg:w-[492px] max-w-full">
+            <div className="w-full lg:w-[492px] lg:h-[656px] max-w-full lg:ml-0">
               <Image
                 src={imageThree}
                 alt="Collection image 3"
@@ -53,11 +57,11 @@ export default function Collection() {
             </div>
 
             {/* Text */}
-            <div className="w-full lg:flex-1">
-              <p className="font-[500] text-[48px] md:text-[48px] leading-[140%] mb-4">
+            <div className="w-full lg:flex-1 lg:ml-[64px] mr-2 mt-4 lg:mt-0">
+              <p className="font-[500] text-[32px] md:text-[48px] leading-[140%] mb-4">
                 The Paloma Haven sofa is a masterpiece of minimalism and luxury.
               </p>
-              <p className="underline text-[24px] font-normal">
+              <p className="underline text-[20px] md:text-[24px] font-[400] leading-[140%] lg:w-[451px] lg:h-[34px]">
                 See more out of &apos;Modern Luxe&apos; collection
               </p>
             </div>
