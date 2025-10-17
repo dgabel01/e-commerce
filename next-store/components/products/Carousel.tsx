@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import Image from "next/image";
 import {
@@ -50,8 +49,6 @@ export function PeekCarousel({ images }: PeekCarouselProps) {
     );
   }
 
-
-
   return (
     <div className="relative w-full max-w-xl mx-auto overflow-visible flex flex-col items-center">
       <Carousel
@@ -66,7 +63,7 @@ export function PeekCarousel({ images }: PeekCarouselProps) {
               key={img.id}
               className="flex-none w-[85%] mx-4 p-0 flex"
             >
-              <div className="relative w-full h-[300px] md:h-[612px] flex-shrink-0">
+              <div className="relative w-full h-[300px] md:h-[582px] flex-shrink-0">
                 <Image
                   src={img.url}
                   alt={`Product image ${index + 1}`}

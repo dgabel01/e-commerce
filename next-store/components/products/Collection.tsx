@@ -5,17 +5,16 @@ import imageThree from "@/public/images/collection_image_three.png";
 
 export default function Collection() {
   return (
-    <section className="bg-white mt-8">
+    <section className="bg-white mt-8 overflow-x-hidden">
       {/* Heading */}
       <h2 className="font-[500] text-[48px] md:text-[48px] leading-[140%] text-center lg:text-left p-8">
         Collection Inspired Interior
       </h2>
 
       <div className="flex flex-col gap-[80px]">
-
         {/* First Image */}
         <div className="px-4 lg:px-0">
-          <div className="p-8 flex justify-center">
+          <div className="p-4 md:p-8 flex justify-center">
             <div className="w-full max-w-[1248px]">
               <Image
                 src={imageOne}
@@ -29,7 +28,7 @@ export default function Collection() {
         </div>
 
         {/* Second Image Fullscreen */}
-        <div className="w-full">
+        <div className="w-full max-w-full">
           <Image
             src={imageTwo}
             alt="Collection image 2"
@@ -39,11 +38,11 @@ export default function Collection() {
           />
         </div>
 
-        {/* Third Image and text*/}
+        {/* Third Image and Text */}
         <div className="px-4 lg:px-0">
-          <div className="p-8 flex flex-col lg:flex-row items-center lg:items-start gap-6">
+          <div className="p-4 md:p-8 flex flex-col lg:flex-row items-center lg:items-start gap-6">
             {/* Third Image */}
-            <div className="w-full lg:w-[492px] mr-[32px]">
+            <div className="w-full lg:w-[492px] max-w-full">
               <Image
                 src={imageThree}
                 alt="Collection image 3"
@@ -58,11 +57,12 @@ export default function Collection() {
               <p className="font-[500] text-[48px] md:text-[48px] leading-[140%] mb-4">
                 The Paloma Haven sofa is a masterpiece of minimalism and luxury.
               </p>
-              <p className="underline text-[24px] font-normal">See more out of &apos;Modern Luxe&apos; collection</p>
+              <p className="underline text-[24px] font-normal">
+                See more out of &apos;Modern Luxe&apos; collection
+              </p>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
