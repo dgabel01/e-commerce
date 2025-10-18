@@ -8,7 +8,7 @@ export const ColorSelector = ({ selectedColor, onChange, COLORS }: ColorSelector
   return (
     <div className="flex flex-col items-start gap-2 mt-8">
       <div className="flex gap-2">
-        <span>Colors:</span>
+        <span>Colors</span>
         <span className="text-[#808080]">{selectedColor || "—"}</span>
       </div>
       <div className="flex items-center gap-3 mt-1">

@@ -77,12 +77,26 @@ export function PeekCarousel({ images }: PeekCarouselProps) {
         </CarouselContent>
 
         {/* Arrows */}
-        <CarouselPrevious className="absolute top-1/2 left-2 -translate-y-1/2" aria-label="Previous">
+        <CarouselPrevious
+          className="absolute top-1/2 left-2 -translate-y-1/2 
+             text-black border border-black bg-transparent 
+             transition-all duration-200 
+             hover:bg-black hover:text-white active:bg-black active:text-white"
+          aria-label="Previous"
+        >
           ←
         </CarouselPrevious>
-        <CarouselNext className="absolute top-1/2 right-2 -translate-y-1/2" aria-label="Next">
+
+        <CarouselNext
+          className="absolute top-1/2 right-2 -translate-y-1/2 
+             text-black border border-black bg-transparent 
+             transition-all duration-200 
+             hover:bg-black hover:text-white active:bg-black active:text-white"
+          aria-label="Next"
+        >
           →
         </CarouselNext>
+
       </Carousel>
 
       {/* Counter */}

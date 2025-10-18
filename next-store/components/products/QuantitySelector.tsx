@@ -8,7 +8,7 @@ export const QuantitySelector = ({ quantity, setQuantity }: QuantitySelectorProp
   const inc = () => setQuantity(quantity + 1);
 
   return (
-    <div className="flex items-center border border-gray-300 rounded">
+    <div className="flex items-center border border-gray-300 rounded w-[136px] h-[48px]">
       <button onClick={dec} className="px-3 py-2 text-lg">
         -
       </button>
