@@ -2,7 +2,7 @@ import { Product, Variant } from "@/types/productType";
 
 export const fixImageUrl = (url: string | undefined) => {
   if (!url) return "";
-  return url.replace("localhost:9000", "localhost:9001");
+  return url.replace("localhost:9000", "localhost:9001"); //Some process was running on 9000
 };
 
 export const getVariantPrice = (variant: Variant | null, regionId: string) => {
