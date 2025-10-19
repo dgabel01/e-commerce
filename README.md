@@ -4,6 +4,7 @@ Product stranica izrađena prema Figma dizajnu korištenjem Next.js, TypeScript 
 
 - backend sustav (Medusa)
 - frontend aplikaciju (Next.js)
+- db folder koji sadrži lokalne verzije korištene baze
 
 ## Značajke
 
@@ -75,7 +76,7 @@ NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://localhost:9001
 NEXT_PUBLIC_MEDUSA_API_KEY=pk_cd02fba29bb2f7a2b25e3e7654609b0ae534fe11b15d74cb4cbfc216ef4f9148
 ```
 
-5. Postaviti bazu podataka:
+5. Postaviti bazu podataka(korištenjem .dump datoteke ili .sql datoteke):
 U terminalu izvršiti sljedeće naredbe:
 ```
 psql postgres
@@ -83,10 +84,18 @@ CREATE USER medusa_admin WITH PASSWORD 'MedusaPass123';
 CREATE DATABASE medusa-medusa_backend;
 GRANT ALL PRIVILEGES ON DATABASE medusa-medusa_backend TO medusa_admin;
 \q
+
+,zatim:
+
 pg_restore -U medusa_admin -d medusa-medusa_backend db/medusa_db.dump
+
+ili naredbom:
+
+psql -U medusa_admin -d medusa-medusa_backend < medusa_backup.sql
+
 ```
 Napomena: Dump korištene baze podataka lokalno pri razvoju(najjednostavniji način za rekreaciju lokalne baze), korišteno: psql (PostgreSQL) 14.19 (Homebrew).
-Medusa zahtijeva Redis za caching i background poslove. Redis je moguće pokrenuti sa Dockerom:
+Medusa zahtijeva Redis za caching i background poslove. Redis je moguće pokrenuti sa Dockerom(moguće da nije nuž):
 ```
 docker run -d --name redis -p 6379:6379 redis
 ```
